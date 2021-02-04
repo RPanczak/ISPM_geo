@@ -5,32 +5,77 @@ library(tmap)
 tmap_mode("view")
 
 # #################################################
-# boundaries 2020-10
-plz_20_10 <- st_read("data-raw/PLZ/20201001/PLZO_SHP_LV95/PLZO_PLZ.shp") %>% 
-  select(PLZ) %>% 
-  filter(PLZ != 9999) %>% 
-  filter(PLZ < 9485 | PLZ > 9499)
+# testing
 
-any(is.na(st_dimension(plz_20_10)))
-
+# testing <- st_read("data-raw/PLZ/20210101/PLZO_SHP_LV95/PLZO_PLZ.shp")
+# 
+# summary(testing$PLZ)
+# 
+# any(is.na(st_dimension(testing)))
+# 
 # # FL
-# plz_20_10 %>%
+# testing %>%
 #   filter(PLZ>= 9485 & PLZ <= 9499) %>%
 #   qtm()
-
+# 
 # # lakes
-# plz_20_10 %>% 
-#   filter(PLZ == 9999) %>% 
+# testing %>%
+#   filter(PLZ == 9999) %>%
+#   qtm(fill = "blue", borders = "blue")
+# 
+# testing %<>% 
+#   select(PLZ) %>% 
+#   filter(PLZ != 9999) %>% 
+#   filter(PLZ < 9485 | PLZ > 9499)
+# 
+# # funny ones
+# testing %>%
+#   filter(PLZ %in% c(8238)) %>%
 #   qtm(fill = NULL, borders = "red")
+# 
+# # multipart features!
+# nrow(testing)
+# length(unique(testing$PLZ))
+# 
+# rm(testing)
 
-# funny ones
-plz_20_10 %>%
-  filter(PLZ %in% c(8238)) %>%
-  qtm(fill = NULL, borders = "red")
+# #################################################
+# read func
+# at the mo it needs "202010" as argument
+# add checks fo rcorrect arg
+# maybe convert to string if user adds nummeric
+# fancy pantsy regex check for input could be an option too?
 
-nrow(plz_20_10)
-length(unique(plz_20_10$PLZ))
-summary(plz_20_10$PLZ)
+read_plz <- function(plz_date) {
+  
+  path <- paste0("data-raw/PLZ/", plz_date, "001/PLZO_SHP_LV95/PLZO_PLZ.shp")
+  
+  plz_raw <- sf::st_read("data-raw/PLZ/20201001/PLZO_SHP_LV95/PLZO_PLZ.shp",
+                     quiet = TRUE) 
+  
+  plz <- plz_raw %>% 
+    dplyr::select(PLZ) %>%
+    dplyr::filter(PLZ != 9999) %>%
+    dplyr::filter(PLZ < 9485 | PLZ > 9499)
+  
+  raw_features <- nrow(plz_raw)
+  raw_distinct <- length(unique(plz_raw$PLZ))
+  plz_features <- nrow(plz)
+  plz_distinct <- length(unique(plz$PLZ))
+  
+  print(paste0("Processing data from: ", path))
+  print(paste0("Raw dataset of ", raw_features, " features representing ",
+               raw_distinct, " postcodes"))
+  print(paste0("Processed to ", plz_features, " features representing ",
+               plz_distinct, " postcodes"))  
+  plz
+
+}
+
+# #################################################
+# boundaries 2020-10
+
+plz_20_10 <- read_plz("202010")
 
 # plot(st_geometry(plz_20_10))
 qtm(plz_20_10)
@@ -50,16 +95,8 @@ plz_20_10 %>%
 
 # #################################################
 # boundaries 2021-01
-plz_21_01 <- st_read("data-raw/PLZ/20210101/PLZO_SHP_LV95/PLZO_PLZ.shp") %>% 
-  select(PLZ) %>% 
-  filter(PLZ != 9999) %>% 
-  filter(PLZ < 9485 | PLZ > 9499)
 
-any(is.na(st_dimension(plz_21_01)))
-
-nrow(plz_21_01)
-length(unique(plz_21_01$PLZ))
-summary(plz_21_01$PLZ)
+plz_21_01 <- read_plz("202101")
 
 # plot(st_geometry(plz_21_01))
 qtm(plz_21_01)
