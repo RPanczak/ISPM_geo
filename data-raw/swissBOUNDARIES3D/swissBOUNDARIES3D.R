@@ -92,6 +92,12 @@ can_20 %>%
 
 write_rds(can_20, "data/swissBOUNDARIES3D/can_20.Rds")
 
+can_20 %>% 
+  select(KANTONSNUM, KT_TEIL) %>% 
+  st_write("data/swissBOUNDARIES3D/can_20.shp", delete_dsn = TRUE)
+
+rm(can_20_raw)
+
 # #################################################
 # boundaries 18
 gem_18_raw <- st_read("data-raw/swissBOUNDARIES3D/BOUNDARIES_2018/DATEN/swissBOUNDARIES3D/SHAPEFILE_LV95_LN02/swissBOUNDARIES3D_1_3_TLM_HOHEITSGEBIET.shp")
@@ -135,11 +141,11 @@ plot(st_geometry(lac18))
 View(st_drop_geometry(lac18))
 
 gem18 %>% 
-  # select(GMDNR) %>% 
+  select(GMDNR) %>%
   saveRDS("data/swissBOUNDARIES3D/gem18.Rds")
 
 gem18 %>% 
-  # select(GMDNR) %>% 
+  select(GMDNR) %>%
   st_write("data/swissBOUNDARIES3D/gem18.shp", delete_dsn = TRUE)
 
 # lac18 %>% 
@@ -176,3 +182,9 @@ can_18 %>%
   plot()
 
 write_rds(can_18, "data/swissBOUNDARIES3D/can_18.Rds")
+
+can_18 %>% 
+  select(KANTONSNUM, KT_TEIL) %>% 
+  st_write("data/swissBOUNDARIES3D/can_18.shp", delete_dsn = TRUE)
+
+rm(can_18_raw)
