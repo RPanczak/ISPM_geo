@@ -64,33 +64,33 @@ gem20 %>%
 rm(gem_20_raw)
 
 # ###############################################
-canton_raw <- st_read("data-raw/swissBOUNDARIES3D/BOUNDARIES_2020_1/DATEN/swissBOUNDARIES3D/SHAPEFILE_LV95_LN02/swissBOUNDARIES3D_1_3_TLM_KANTONSGEBIET.shp")
+can_20_raw <- st_read("data-raw/swissBOUNDARIES3D/BOUNDARIES_2020_1/DATEN/swissBOUNDARIES3D/SHAPEFILE_LV95_LN02/swissBOUNDARIES3D_1_3_TLM_KANTONSGEBIET.shp")
 
-nrow(canton_raw)
-length(unique(canton_raw$KANTONSNUM))
+nrow(can_20_raw)
+length(unique(can_20_raw$KANTONSNUM))
 
 # plot(st_geometry(gem_raw))
 
-canton_2020_01 <- canton_raw %>% 
+can_20 <- can_20_raw %>% 
   st_zm(drop = TRUE) %>% 
   filter(ICC == "CH") %>% 
   select(KANTONSNUM, KT_TEIL, NAME) %>% 
   arrange(KANTONSNUM, KT_TEIL)
 
-any(is.na(st_dimension(canton_2020_01)))
-nrow(canton_2020_01)
-length(unique(canton_2020_01$KANTONSNUM))
+any(is.na(st_dimension(can_20)))
+nrow(can_20)
+length(unique(can_20$KANTONSNUM))
 
-View(st_drop_geometry(canton_2020_01))
-plot(st_geometry(canton_2020_01))
+View(st_drop_geometry(can_20))
+plot(st_geometry(can_20))
 
 # FR
-canton_2020_01 %>% 
+can_20 %>% 
   filter(KANTONSNUM == 10) %>% 
   select(KT_TEIL) %>% 
   plot()
 
-write_rds(canton_2020_01, "data/swissBOUNDARIES3D/canton_2020_01.Rds")
+write_rds(can_20, "data/swissBOUNDARIES3D/can_20.Rds")
 
 # #################################################
 # boundaries 18
@@ -149,30 +149,30 @@ gem18 %>%
 rm(gem_18_raw)
 
 # ###############################################
-canton_raw <- st_read("data-raw/swissBOUNDARIES3D/BOUNDARIES_2018/DATEN/swissBOUNDARIES3D/SHAPEFILE_LV95_LN02/swissBOUNDARIES3D_1_3_TLM_KANTONSGEBIET.shp")
+can_18_raw <- st_read("data-raw/swissBOUNDARIES3D/BOUNDARIES_2018/DATEN/swissBOUNDARIES3D/SHAPEFILE_LV95_LN02/swissBOUNDARIES3D_1_3_TLM_KANTONSGEBIET.shp")
 
-nrow(canton_raw)
-length(unique(canton_raw$KANTONSNUM))
+nrow(can_18_raw)
+length(unique(can_18_raw$KANTONSNUM))
 
 # plot(st_geometry(gem_raw))
 
-canton_2018 <- canton_raw %>% 
+can_18 <- can_18_raw %>% 
   st_zm(drop = TRUE) %>% 
   filter(ICC == "CH") %>% 
   select(KANTONSNUM, KT_TEIL, NAME) %>% 
   arrange(KANTONSNUM, KT_TEIL)
 
-any(is.na(st_dimension(canton_2018)))
-nrow(canton_2018)
-length(unique(canton_2018$KANTONSNUM))
+any(is.na(st_dimension(can_18)))
+nrow(can_18)
+length(unique(can_18$KANTONSNUM))
 
-View(st_drop_geometry(canton_2018))
-plot(st_geometry(canton_2018))
+View(st_drop_geometry(can_18))
+plot(st_geometry(can_18))
 
 # FR
-canton_2018 %>% 
+can_18 %>% 
   filter(KANTONSNUM == 10) %>% 
   select(KT_TEIL) %>% 
   plot()
 
-write_rds(canton_2018, "data/swissBOUNDARIES3D/canton_2018.Rds")
+write_rds(can_18, "data/swissBOUNDARIES3D/can_18.Rds")
