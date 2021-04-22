@@ -53,9 +53,9 @@ gem_21 %>%
   select(GMDNR) %>% 
   saveRDS("data/swisstopo/swissBOUNDARIES3D/gem_21.Rds")
 
-gem_21 %>% 
-  select(GMDNR) %>% 
-  st_write("data/swisstopo/swissBOUNDARIES3D/gem_21.shp", delete_dsn = TRUE)
+# gem_21 %>% 
+#   select(GMDNR) %>% 
+#   st_write("data/swisstopo/swissBOUNDARIES3D/gem_21.shp", delete_dsn = TRUE)
 
 # lac20 %>% 
 #   select(GMDNR) %>% 
@@ -92,8 +92,8 @@ can_21 %>%
 
 write_rds(can_21, "data/swisstopo/swissBOUNDARIES3D/can_21.Rds")
 
-can_21 %>% 
-  select(KANTONSNUM, KT_TEIL) %>% 
-  st_write("data/swisstopo/swissBOUNDARIES3D/can_21.shp", delete_dsn = TRUE)
+# can_21 %>% 
+#   select(KANTONSNUM, KT_TEIL) %>% 
+#   st_write("data/swisstopo/swissBOUNDARIES3D/can_21.shp", delete_dsn = TRUE)
 
 rm(can_21_raw)
