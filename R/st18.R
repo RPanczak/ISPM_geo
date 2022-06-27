@@ -45,12 +45,16 @@ plot(st_geometry(lac18))
 View(st_drop_geometry(lac18))
 
 gem18 %>% 
-  select(GMDNR) %>%
+  # select(GMDNR) %>%
   saveRDS("data/swisstopo/swissBOUNDARIES3D/gem18.Rds")
 
-gem18 %>% 
+# gem18 %>% 
+#   select(GMDNR) %>%
+#   st_write("data/swisstopo/swissBOUNDARIES3D/gem18.shp", delete_dsn = TRUE)
+
+lac18 %>% 
   select(GMDNR) %>%
-  st_write("data/swisstopo/swissBOUNDARIES3D/gem18.shp", delete_dsn = TRUE)
+  saveRDS("data/swisstopo/swissBOUNDARIES3D/lac18.Rds")
 
 # lac18 %>% 
 #   select(GMDNR) %>% 

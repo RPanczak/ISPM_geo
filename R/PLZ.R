@@ -82,16 +82,11 @@ qtm(plz_20_10)
 # View(st_drop_geometry(plz_20_10))
 # View(plz_20_10)
 
-# 1000 - multi polygon example
-plz_20_10 %>% 
-  filter(PLZ == 1000) %>% 
-  qtm(fill = NULL, borders = "red")
-
 plz_20_10 %>% 
   write_rds("data/PLZ/plz_20_10.Rds")
 
-plz_20_10 %>% 
-  st_write("data/PLZ/plz_20_10.shp", delete_dsn = TRUE)
+# plz_20_10 %>% 
+#   st_write("data/PLZ/plz_20_10.shp", delete_dsn = TRUE)
 
 # #################################################
 # boundaries 2021-01
@@ -103,13 +98,29 @@ qtm(plz_21_01)
 # View(st_drop_geometry(plz_21_01))
 # View(plz_21_01)
 
-# 1000 - multi polygon example
-plz_21_01 %>% 
-  filter(PLZ == 1000) %>% 
-  qtm(fill = NULL, borders = "red")
-
 plz_21_01 %>% 
   write_rds("data/PLZ/plz_21_01.Rds")
 
-plz_21_01 %>% 
-  st_write("data/PLZ/plz_21_01.shp", delete_dsn = TRUE)
+# plz_21_01 %>% 
+#   st_write("data/PLZ/plz_21_01.shp", delete_dsn = TRUE)
+
+# #################################################
+# boundaries 2022-06
+
+plz_22_06 <- read_plz("202206")
+
+# plot(st_geometry(plz_22_06))
+qtm(plz_22_06)
+# View(st_drop_geometry(plz_22_06))
+# View(plz_22_06)
+
+# 1000 - multi polygon example
+plz_22_06 %>% 
+  filter(PLZ == 1000) %>% 
+  qtm(fill = NULL, borders = "red")
+
+plz_22_06 %>% 
+  write_rds("data/PLZ/plz_22_06.Rds")
+
+# plz_22_06 %>% 
+#   st_write("data/PLZ/plz_22_06.shp", delete_dsn = TRUE)
