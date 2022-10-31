@@ -40,9 +40,9 @@ tmap_mode("view")
 # rm(testing)
 
 # #################################################
-# read func
-# at the mo it needs "202010" as argument
-# add checks fo rcorrect arg
+# read function
+# at the moment it needs "202010" as argument
+# add checks fo correct arg
 # maybe convert to string if user adds nummeric
 # fancy pantsy regex check for input could be an option too?
 
